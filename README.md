@@ -24,7 +24,12 @@ Enemy memiliki attribut sebagai berikut:
 class Enemy digunakan untuk mengelompokkan objek Entity yang lebih spesifik yaitu musuh. Attribut Health dan defense diletakkan di class ini karena semua musuh perlu memiliki nyawa agar dapat dikalahkan serta pertahanan agar tidak terlalu mudah dikalahkan. Attribut contactDamage diletakkan di class ini karena apa gunanya musuh jika tidak dapat memberikan damage, jika diletakkan di class parentnya aneh juga kalau sebuah tembok dapat memberikan damage.
 
 ### 3. Bosses
-class Bosses merupakan class yang lebih spesifik dari Enemy. Class ini memilik attribut Epithet, yaitu sebuah nama julukan untuk boss agar keren. Attribute phase dan attackPattern untuk membedakan Bosses dengan enemy biasa dari segi variasi serangan.
+Bosses memiliki attribut sebagai berikut:
+- Epithet (string)
+- Phase (int)
+- AttackPattern (int)
+
+class Bosses merupakan class yang lebih spesifik dari Enemy. Class ini memiliki attribut Epithet, yaitu sebuah nama julukan untuk boss agar keren. Attribute phase dan attackPattern untuk membedakan Bosses dengan enemy biasa dari segi variasi serangan.
 
 ### Method
 Method dari masing-masing class dalam program ini hanya getter dan setter untuk masing-masing attribut class saja.
