@@ -68,6 +68,7 @@ public class Main
     public static void main(String args[])
     {
         List<Bosses> listBosses = new LinkedList<>(); // inisialisasi list of object
+        // data dummy
         listBosses.add(new Bosses("boss01", "Malenia", 10, 20, 2.5f, 1200, 30, 45, "Blade of Miquella", 2, 3));
         listBosses.add(new Bosses("boss02", "Radahn", -15, 8, 3.2f, 1800, 50, 60, "Starscourge", 2, 5));
         listBosses.add(new Bosses("boss03", "Ranni", 0, -12, 1.8f, 900, 20, 25, "Lunar Princess", 1, 4));
@@ -98,7 +99,7 @@ public class Main
                 }
                 else
                 {
-                    printDynamicTable(listBosses);
+                    printDynamicTable(listBosses); // print tabel dinamis
                 }
                 
             }
@@ -119,11 +120,12 @@ public class Main
 
                 System.out.println("Masukkan data: ");
                 System.out.print("id (String): ");
-                id = input.next();
+                
 
                 boolean found = true;
                 while(found) // cek apakah id sudah digunakan di list (id harus unik)
                 {
+                    id = input.next();
                     found = false;
                     for(Bosses data : listBosses)
                     {
@@ -136,12 +138,12 @@ public class Main
                     {
                         System.out.printf("id %s sudah ada!\n", id);
                         System.out.print("id (String): ");
-                        id = input.next();
                     }
                 }
 
                 System.out.print("name (String): ");
-                name = input.next();
+                input.nextLine();
+                name = input.nextLine();
                 System.out.print("posisi X (int): ");
                 posX = input.nextInt();
                 System.out.print("posisi Y (int): ");
@@ -155,7 +157,8 @@ public class Main
                 System.out.print("contactDamage (int): ");
                 contactDamage = input.nextInt();
                 System.out.print("epithet (String): ");
-                epithet = input.next();
+                input.nextLine();
+                epithet = input.nextLine();
                 System.out.print("phase (int): ");
                 phase = input.nextInt();
                 System.out.print("attackPattern (int): ");
@@ -212,7 +215,8 @@ public class Main
                         // input nilai baru attribut
                         System.out.println("data ditemukan!");
                         System.out.print("name baru (String): ");
-                        String name = input.next();
+                        input.nextLine();
+                        String name = input.nextLine();
                         System.out.print("position X baru (int): ");
                         int posX = input.nextInt();
                         System.out.print("position Y baru (int): ");
@@ -226,7 +230,8 @@ public class Main
                         System.out.print("contactDamage baru (int): ");
                         int contactDamage = input.nextInt();
                         System.out.print("epithet baru (String): ");
-                        String epithet = input.next();
+                        input.nextLine();
+                        String epithet = input.nextLine();
                         System.out.print("phase baru (int): ");
                         int phase = input.nextInt();
                         System.out.print("attackPattern baru (int): ");
