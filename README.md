@@ -33,7 +33,11 @@ Method dari masing-masing class dalam program ini hanya getter dan setter untuk 
 ![alt text](<dokumentasi/Diagram TP2.drawio.png>)
 
 ## Penjelasan alur program
-Saat program dijalankan, program akan menampilkan pilihan menu yang bisa dipilih oleh user dengan nomor. Kemudian, user menginputkan nomor pilihan menu. Selanjutnya, program akan menampilkan data dari pilihan menu user atau meminta data masukkan dari user tergantung pada pilihan menu yang diinput user.
+1. Saat program dijalankan, program akan menampilkan pilihan menu yang bisa dipilih oleh user dengan nomor.
+
+2. Kemudian, user menginputkan nomor pilihan menu.
+
+3. Selanjutnya, program akan menampilkan data dari pilihan menu user atau meminta data masukkan dari user tergantung pada pilihan menu yang diinput user.
 
 ## Dokumentasi
 
@@ -41,7 +45,7 @@ Saat program dijalankan, program akan menampilkan pilihan menu yang bisa dipilih
 ![alt text](<dokumentasi/cpp/CppTambahData.png>)
 
 ### Java
-![alt text](<dokumentasi/Java/JavaTambahData.png>)
+![alt text](<dokumentasi/java/JavaTambahData.png>)
 
 ### Python
 ![alt text](<dokumentasi/python/PythonTambahData.png>)
