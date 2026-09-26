@@ -1,0 +1,14 @@
+2
+boss06
+Gerson
+10
+10
+3.2
+2000
+50
+80
+The Fallen Paladin
+2
+5
+Y
+1
