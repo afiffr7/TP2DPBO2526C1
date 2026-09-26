@@ -6,9 +6,73 @@ import java.util.List;
 
 public class Main
 {
+    // method untuk print tabel dinamis
+    private static void printDynamicTable(List<Bosses> listBosses)
+    {
+        String[] headers = {"Id", "Name", "Position", "CollisionRadius", "Health", "Defense", "ContactDamage", "Epithet", "Phase", "AttackPattern"};
+        List<String[]> rows = new LinkedList<>();
+        int[] widths = new int[headers.length];
+
+        for(int column = 0; column < headers.length; column++)
+        {
+            widths[column] = headers[column].length();
+        }
+        for(Bosses data : listBosses)
+        {
+            String[] row = {
+                data.getId(), data.getName(), data.getXpos() + "," + data.getYpos(),
+                Float.toString(data.getCollisionRadius()), Integer.toString(data.getHealth()),
+                Integer.toString(data.getDefense()), Integer.toString(data.getContactDamage()),
+                data.getEpithet(), Integer.toString(data.getPhase()), Integer.toString(data.getAttackPattern())
+            };
+            rows.add(row);
+            for(int column = 0; column < row.length; column++)
+            {
+                widths[column] = Math.max(widths[column], row[column].length());
+            }
+        }
+
+        printTableSeparator(widths);
+        printTableRow(headers, widths);
+        printTableSeparator(widths);
+        for(String[] row : rows)
+        {
+            printTableRow(row, widths);
+        }
+        printTableSeparator(widths);
+    }
+    // method untuk print baris data
+    private static void printTableRow(String[] values, int[] widths)
+    {
+        for(int column = 0; column < values.length; column++)
+        {
+            System.out.print("| " + String.format("%-" + widths[column] + "s", values[column]) + " ");
+        }
+        System.out.println("|");
+    }
+
+    // method untuk print separator
+    private static void printTableSeparator(int[] widths)
+    {
+        for(int width : widths)
+        {
+            System.out.print("+");
+            for(int dash = 0; dash < width + 2; dash++)
+            {
+                System.out.print("-");
+            }
+        }
+        System.out.println("+");
+    }
+
     public static void main(String args[])
     {
         List<Bosses> listBosses = new LinkedList<>(); // inisialisasi list of object
+        listBosses.add(new Bosses("boss01", "Malenia", 10, 20, 2.5f, 1200, 30, 45, "Blade of Miquella", 2, 3));
+        listBosses.add(new Bosses("boss02", "Radahn", -15, 8, 3.2f, 1800, 50, 60, "Starscourge", 2, 5));
+        listBosses.add(new Bosses("boss03", "Ranni", 0, -12, 1.8f, 900, 20, 25, "Lunar Princess", 1, 4));
+        listBosses.add(new Bosses("boss04", "Godfrey", 25, 30, 2.7f, 1500, 40, 55, "First Elden Lord", 2, 6));
+        listBosses.add(new Bosses("boss05", "Morgott", -8, 14, 2.1f, 1100, 35, 40, "Omen King", 2, 2));
         char makeChanges = 'Y'; // variabel penampung decision
         Scanner input = new Scanner(System.in); // inisialisasi scanner
 
@@ -34,22 +98,7 @@ public class Main
                 }
                 else
                 {
-                    System.out.println("List data Bosses: ");
-                    int num = 1;
-                    for(Bosses data : listBosses) // menggunakan foreach untuk output data Bosses
-                    {
-                        System.out.print(num + ". " + data.getId() + " | ");
-                        System.out.print(data.getName() + " | ");
-                        System.out.print("(" + data.getXpos() + "," + data.getYpos() + ") | ");
-                        System.out.print(data.getCollisionRadius() + " | ");
-                        System.out.print(data.getHealth() + " | ");
-                        System.out.print(data.getDefense() + " | ");
-                        System.out.print(data.getContactDamage() + " | ");
-                        System.out.print(data.getEpithet() + " | ");
-                        System.out.print(data.getPhase() + " | ");
-                        System.out.println(data.getAttackPattern());
-                        num++;
-                    }
+                    printDynamicTable(listBosses);
                 }
                 
             }
@@ -129,11 +178,18 @@ public class Main
                 {
                     if(data.getId().equals(id))
                     {
-                        System.out.println("data ditemukan!");
-                        System.out.printf("%s | %s | (%d,%d) | %.2f | %d | %d | %d | %s | %d | %d\n",
-                            data.getId(), data.getName(), data.getXpos(), data.getYpos(), data.getCollisionRadius(),
-                            data.getHealth(), data.getDefense(), data.getContactDamage(),
-                            data.getEpithet(), data.getPhase(), data.getAttackPattern());
+                        System.out.println("Bosses ditemukan!");
+                        // menampilkan data
+                        System.out.println("id: " + data.getId());
+                        System.out.println("name: " + data.getName());
+                        System.out.println("position: (" + data.getXpos() + "," + data.getYpos() + ")");
+                        System.out.println("collisionRadius: " + data.getCollisionRadius());
+                        System.out.println("health: " + data.getHealth());
+                        System.out.println("defense: " + data.getDefense());
+                        System.out.println("contactDamage: " + data.getContactDamage());
+                        System.out.println("epithet: " + data.getEpithet());
+                        System.out.println("phase: " + data.getPhase());
+                        System.out.println("attackPattern: " + data.getAttackPattern());
                         found = true;
                     }
                 }

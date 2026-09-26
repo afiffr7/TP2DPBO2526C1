@@ -1,28 +1,14 @@
 from bosses import Bosses
-# fungsi bantu untuk input bilangan bulat beserta error handlingnya
-def inputInt(prompt:str):
-    notInt = 1
-    while notInt == 1:
-        try:
-            value = int(input(prompt))
-            notInt = 0
-        except Exception:   # jika inputan bukan bilangan bulat, input ulang
-            print("input harus bilangan bulat!")
-    return value
 
-# fungsi bantu untuk input bilangan desimal beserta error handlingnya
-def inputFloat(prompt:str):
-    notFloat = 1
-    while notFloat == 1:
-        try:
-            value = float(input(prompt))
-            notFloat = 0
-        except Exception:   # jika inputan bukan bilangan desimal, input ulang
-            print("input harus bilangan desimal!")
-    return value
 
 # inisialisasi list
-listBosses = []
+listBosses = [
+    Bosses("boss01", "Malenia", 10, 20, 2.5, 1200, 30, 45, "Blade of Miquella", 2, 3),
+    Bosses("boss02", "Radahn", -15, 8, 3.2, 1800, 50, 60, "Starscourge", 2, 5),
+    Bosses("boss03", "Ranni", 0, -12, 1.8, 900, 20, 25, "Lunar Princess", 1, 4),
+    Bosses("boss04", "Godfrey", 25, 30, 2.7, 1500, 40, 55, "First Elden Lord", 2, 6),
+    Bosses("boss05", "Morgott", -8, 14, 2.1, 1100, 35, 40, "Omen King", 2, 2),
+]
 makeChanges = "Y"
 
 while makeChanges != "N":
@@ -32,11 +18,38 @@ while makeChanges != "N":
     print("")
 
     if menu == 1:
-        num = 1
         if listBosses:     # cek apakah list berisi
+            # tentukan panjang masing-masing kolom untuk tabel dinamis
+            maxIdlen = max(len(boss.getId()) for boss in listBosses)
+            maxNamelen = max(len(boss.getName()) for boss in listBosses)
+            maxPoslen = max(len(str(boss.getXpos())+str(boss.getYpos()))+1 for boss in listBosses)
+            maxCollisionRadiuslen = max(len(str(boss.getCollisionRadius())) for boss in listBosses)
+            maxHealthlen = max(len(str(boss.getHealth())) for boss in listBosses)
+            maxDefenselen = max(len(str(boss.getDefense())) for boss in listBosses)
+            maxContactDamagelen = max(len(str(boss.getContactDamage())) for boss in listBosses)
+            maxEpithetlen = max(len(boss.getEpithet()) for boss in listBosses)
+            maxPhaselen = max(len(str(boss.getPhase())) for boss in listBosses)
+            maxAttackPatternlen = max(len(str(boss.getAttackPattern())) for boss in listBosses)
+
+            # membandingkan hasil panjang kolom dengan minimum panjang yakni header kolom
+            maxIdlen = max(maxIdlen, 2)
+            maxNamelen = max(maxNamelen, 4)
+            maxPoslen = max(maxPoslen, 8)
+            maxCollisionRadiuslen = max(maxCollisionRadiuslen, 15)
+            maxHealthlen = max(maxHealthlen, 6)
+            maxDefenselen = max(maxDefenselen, 7)
+            maxContactDamagelen = max(maxContactDamagelen, 13)
+            maxEpithetlen = max(maxEpithetlen, 7)
+            maxPhaselen = max(maxPhaselen, 5)
+            maxAttackPatternlen = max(maxAttackPatternlen, 13)
+
+            # print list dengan tabel dinamis
+            print("+" + "-"*maxIdlen + "+" + "-"*maxNamelen + "+" + "-"*maxPoslen + "+" + "-"*maxCollisionRadiuslen + "+" + "-"*maxHealthlen + "+" + "-"*maxDefenselen + "+" + "-"*maxContactDamagelen + "+" + "-"*maxEpithetlen + "+" + "-"*maxPhaselen + "+" + "-"*maxAttackPatternlen + "+")
+            print(f"|{'Id':<{maxIdlen}}|{'Name':<{maxNamelen}}|{'Position':<{maxPoslen}}|{'CollisionRadius':<{maxCollisionRadiuslen}}|{'Health':<{maxHealthlen}}|{'Defense':<{maxDefenselen}}|{'ContactDamage':<{maxContactDamagelen}}|{'Epithet':<{maxEpithetlen}}|{'Phase':<{maxPhaselen}}|{'AttackPattern':<{maxAttackPatternlen}}|")
+            print("+" + "-"*maxIdlen + "+" + "-"*maxNamelen + "+" + "-"*maxPoslen + "+" + "-"*maxCollisionRadiuslen + "+" + "-"*maxHealthlen + "+" + "-"*maxDefenselen + "+" + "-"*maxContactDamagelen + "+" + "-"*maxEpithetlen + "+" + "-"*maxPhaselen + "+" + "-"*maxAttackPatternlen + "+")
             for boss in listBosses:     # foreach list
-                print(f"{num}. {boss.getId()} | {boss.getName()} | ({boss.getXpos()},{boss.getYpos()}) | {boss.getCollisionRadius()} | {boss.getHealth()} | {boss.getDefense()} | {boss.getContactDamage()} | {boss.getEpithet()} | {boss.getPhase()} | {boss.getAttackPattern()}")
-                num += 1
+                print(f"|{boss.getId():<{maxIdlen}}|{boss.getName():<{maxNamelen}}|{boss.getXpos()},{boss.getYpos():<{maxPoslen-len(str(boss.getXpos()))-1}}|{boss.getCollisionRadius():<{maxCollisionRadiuslen}}|{boss.getHealth():<{maxHealthlen}}|{boss.getDefense():<{maxDefenselen}}|{boss.getContactDamage():<{maxContactDamagelen}}|{boss.getEpithet():<{maxEpithetlen}}|{boss.getPhase():<{maxPhaselen}}|{boss.getAttackPattern():<{maxAttackPatternlen}}|")
+            print("+" + "-"*maxIdlen + "+" + "-"*maxNamelen + "+" + "-"*maxPoslen + "+" + "-"*maxCollisionRadiuslen + "+" + "-"*maxHealthlen + "+" + "-"*maxDefenselen + "+" + "-"*maxContactDamagelen + "+" + "-"*maxEpithetlen + "+" + "-"*maxPhaselen + "+" + "-"*maxAttackPatternlen + "+")
         else:     # alert jika list kosong
             print("List kosong!")
 
@@ -53,15 +66,15 @@ while makeChanges != "N":
                 print("id sudah digunakan!")
 
         name = input("name (str): ")
-        posX = inputInt("position x (int): ")
-        posY = inputInt("position y (int): ")
-        collisionRadius = inputFloat("collisionRadius (float): ")
-        health = inputInt("health (int): ")
-        defense = inputInt("defense (int): ")
-        contactDamage = inputInt("contactDamage (int): ")
+        posX = int(input("position x (int): "))
+        posY = int(input("position y (int): "))
+        collisionRadius = float(input("collisionRadius (float): "))
+        health = int(input("health (int): "))
+        defense = int(input("defense (int): "))
+        contactDamage = int(input("contactDamage (int): "))
         epithet = input("epithet (str): ")
-        phase = inputInt("phase (int): ")
-        attackPattern = inputInt("attackPattern (int): ")
+        phase = int(input("phase (int): "))
+        attackPattern = int(input("attackPattern (int): "))
 
         # instansiasi boss baru
         newBoss = Bosses(id, name, posX, posY, collisionRadius, health, defense, contactDamage, epithet, phase, attackPattern)
@@ -75,7 +88,17 @@ while makeChanges != "N":
             if boss.getId() == id:     # matching id
                 print("Bosses ditemukan!")
                 found = 1
-                print(f"{boss.getId()} | {boss.getName()} | ({boss.getXpos()},{boss.getYpos()}) | {boss.getCollisionRadius()} | {boss.getHealth()} | {boss.getDefense()} | {boss.getContactDamage()} | {boss.getEpithet()} | {boss.getPhase()} | {boss.getAttackPattern()}")
+                # print data
+                print(f"id: {boss.getId()}")
+                print(f"name: {boss.getName()}")
+                print(f"position: ({boss.getXpos()},{boss.getYpos()})")
+                print(f"collisionRadius: {boss.getCollisionRadius()}")
+                print(f"health: {boss.getHealth()}")
+                print(f"defense: {boss.getDefense()}")
+                print(f"contactDamage: {boss.getContactDamage()}")
+                print(f"epithet: {boss.getEpithet()}")
+                print(f"phase: {boss.getPhase()}")
+                print(f"attackPattern: {boss.getAttackPattern()}")
 
         if found == 0:     # alert jika tidak ditemukan
             print("Bosses tidak ada!")
@@ -89,15 +112,15 @@ while makeChanges != "N":
                 found = 1
                 # input nilai attribut baru
                 name = input("name baru: ")
-                posX = inputInt("position x baru (int): ")
-                posY = inputInt("position y baru (int): ")
-                collisionRadius = inputFloat("collisionRadius baru (float): ")
-                health = inputInt("health baru (int): ")
-                defense = inputInt("defense baru (int): ")
-                contactDamage = inputInt("contactDamage baru (int): ")
+                posX = int(input("position x baru (int): "))
+                posY = int(input("position y baru (int): "))
+                collisionRadius = float(input("collisionRadius baru (float): "))
+                health = int(input("health baru (int): "))
+                defense = int(input("defense baru (int): "))
+                contactDamage = int(input("contactDamage baru (int): "))
                 epithet = input("epithet baru: ")
-                phase = inputInt("phase baru (int): ")
-                attackPattern = inputInt("attackPattern baru (int): ")
+                phase = int(input("phase baru (int): "))
+                attackPattern = int(input("attackPattern baru (int): "))
 
                 # update instance attribut
                 boss.setName(name)

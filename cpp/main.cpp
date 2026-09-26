@@ -1,8 +1,75 @@
 #include"Boss.cpp"
 
+// prosedur untuk print tabel dinamis
+void printDynamicTable(list<Bosses*> listBosses)
+{
+    vector<string> headers = {"Id", "Name", "Position", "CollisionRadius", "Health", "Defense", "ContactDamage", "Epithet", "Phase", "AttackPattern"};
+    vector<vector<string>> rows;
+    vector<int> widths;
+
+    for(string header : headers)
+    {
+        widths.push_back(header.length());
+    }
+    for(Bosses* boss : listBosses)
+    {
+        ostringstream collisionRadius;
+        collisionRadius<<boss->getCollisionRadius();
+        vector<string> row = {
+            boss->getId(), boss->getName(), to_string(boss->getPosition().x) + "," + to_string(boss->getPosition().y),
+            collisionRadius.str(), to_string(boss->getHealth()), to_string(boss->getDefense()),
+            to_string(boss->getContactDamage()), boss->getEpithet(), to_string(boss->getPhase()),
+            to_string(boss->getAttackPattern())
+        };
+        for(int column = 0; column < row.size(); column++)
+        {
+            widths[column] = max(widths[column], (int)row[column].length());
+        }
+        rows.push_back(row);
+    }
+
+    for(int width : widths)
+    {
+        cout<<"+"<<string(width + 2, '-');
+    }
+    cout<<"+\n";
+
+    for(int column = 0; column < headers.size(); column++)
+    {
+        cout<<"| "<<left<<setw(widths[column])<<headers[column]<<" ";
+    }
+    cout<<"|\n";
+    
+    for(int width : widths)
+    {
+        cout<<"+"<<string(width + 2, '-');
+    }
+    cout<<"+\n";
+
+    for(vector<string> row : rows)
+    {
+        for(int column = 0; column < row.size(); column++)
+        {
+            cout<<"| "<<left<<setw(widths[column])<<row[column]<<" ";
+        }
+        cout<<"|\n";
+    }
+    
+    for(int width : widths)
+    {
+        cout<<"+"<<string(width + 2, '-');
+    }
+    cout<<"+\n";
+}
+
 int main()
 {
     list<Bosses*> listBosses; // deklarasi list of object
+    listBosses.push_back(new Bosses("boss01", "Malenia", {10, 20}, 2.5f, 1200, 30, 45, "Blade of Miquella", 2, 3));
+    listBosses.push_back(new Bosses("boss02", "Radahn", {-15, 8}, 3.2f, 1800, 50, 60, "Starscourge", 2, 5));
+    listBosses.push_back(new Bosses("boss03", "Ranni", {0, -12}, 1.8f, 900, 20, 25, "Lunar Princess", 1, 4));
+    listBosses.push_back(new Bosses("boss04", "Godfrey", {25, 30}, 2.7f, 1500, 40, 55, "First Elden Lord", 2, 6));
+    listBosses.push_back(new Bosses("boss05", "Morgott", {-8, 14}, 2.1f, 1100, 35, 40, "Omen King", 2, 2));
     char makeChanges = 'Y'; // variabel penampung decision
     while(makeChanges != 'N')
     {
@@ -19,13 +86,7 @@ int main()
             }
             else
             {
-                cout<<"List data boss:\n";
-                int nomor = 1; // variabel untuk penomoran index
-                for(Bosses* boss : listBosses) // menampilkan data dengan foreach
-                {
-                    cout<<nomor<<". "<<boss->getId()<<" | "<<boss->getName()<<" | ("<<boss->getPosition().x<<","<<boss->getPosition().y<<") | "<<boss->getCollisionRadius()<<" | "<<boss->getHealth()<<" | "<<boss->getDefense()<<" | "<<boss->getContactDamage()<<" | "<<boss->getEpithet()<<" | "<<boss->getPhase()<<" | "<<boss->getAttackPattern()<<endl;
-                    nomor++;
-                }
+                printDynamicTable(listBosses); // print tabel dinamis
             }
             
         }
