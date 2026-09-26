@@ -8,14 +8,16 @@
         private string $epithet;
         private int $phase;
         private int $attackPattern;
+        private string $image = '';
 
         // constructor (memanggil constructor Enemy)
-        public function __construct(string $id, string $name, int $Xpos, int $Ypos, float $collisionRadius, int $health, int $defense, int $contactDamage, string $epithet, int $phase, int $attackPattern)
+        public function __construct(string $id, string $name, int $Xpos, int $Ypos, float $collisionRadius, int $health, int $defense, int $contactDamage, string $epithet, int $phase, int $attackPattern, string $image)
         {
             parent::__construct($id, $name, $Xpos, $Ypos, $collisionRadius, $health, $defense, $contactDamage);
             $this->epithet = $epithet;
             $this->phase = $phase;
             $this->attackPattern = $attackPattern;
+            $this->image = $image;
         }
 
         // setter method
@@ -31,6 +33,10 @@
         {
             $this->attackPattern = $attackPattern;
         }
+        public function setImage(string $image)
+        {
+            $this->image = $image;
+        }
 
         // getter method
         public function getEpithet()
@@ -44,6 +50,10 @@
         public function getAttackPattern()
         {
             return $this->attackPattern;
+        }
+        public function getImage()
+        {
+            return $this->image;
         }
     }
 ?>

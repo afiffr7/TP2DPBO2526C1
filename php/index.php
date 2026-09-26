@@ -7,11 +7,24 @@
     if(!isset($_SESSION['listBosses'])){
         $_SESSION['listBosses'] = [];
         // initial dummy data
-        $_SESSION['listBosses'][] = new Bosses("boss01", "Malenia", 10, 20, 2.5, 1200, 30, 45, "Blade of Miquella", 2, 3);
-        $_SESSION['listBosses'][] = new Bosses("boss02", "Radahn", -15, 8, 3.2, 1800, 50, 60, "Starscourge", 2, 5);
-        $_SESSION['listBosses'][] = new Bosses("boss03", "Ranni", 0, -12, 1.8, 900, 20, 25, "Lunar Princess", 1, 4);
-        $_SESSION['listBosses'][] = new Bosses("boss04", "Godfrey", 25, 30, 2.7, 1500, 40, 55, "First Elden Lord", 2, 6);
-        $_SESSION['listBosses'][] = new Bosses("boss05", "Morgott", -8, 14, 2.1, 1100, 35, 40, "Omen King", 2, 2);
+        $_SESSION['listBosses'][] = new Bosses("boss01", "Malenia", 10, 20, 2.5, 1200, 30, 45, "Blade of Miquella", 2, 3, "malenia.jpg");
+        $_SESSION['listBosses'][] = new Bosses("boss02", "Radahn", -15, 8, 3.2, 1800, 50, 60, "Starscourge", 2, 5, "radahn.jpg");
+        $_SESSION['listBosses'][] = new Bosses("boss03", "Ranni", 0, -12, 1.8, 900, 20, 25, "Lunar Princess", 1, 4, "ranni.jpg");
+        $_SESSION['listBosses'][] = new Bosses("boss04", "Godfrey", 25, 30, 2.7, 1500, 40, 55, "First Elden Lord", 2, 6, "godfrey.jpg");
+        $_SESSION['listBosses'][] = new Bosses("boss05", "Morgott", -8, 14, 2.1, 1100, 35, 40, "Omen King", 2, 2, "morgott.jpg");
+    }
+
+    $defaultImages = [
+        'boss01' => 'malenia.jpg',
+        'boss02' => 'radahn.jpg',
+        'boss03' => 'ranni.jpg',
+        'boss04' => 'godfrey.jpg',
+        'boss05' => 'morgott.jpg'
+    ];
+    foreach($_SESSION['listBosses'] as $boss){
+        if($boss !== null && $boss->getImage() === '' && isset($defaultImages[$boss->getId()])){
+            $boss->setImage($defaultImages[$boss->getId()]);
+        }
     }
 ?>
 
@@ -48,6 +61,7 @@
                                 <th>Epithet</th>
                                 <th>Phase</th>
                                 <th>Attack Pattern</th>
+                                <th>Image</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,6 +81,12 @@
                                         echo "<td>".htmlspecialchars($data->getEpithet(), ENT_QUOTES, 'UTF-8')."</td>";
                                         echo "<td>".$data->getPhase()."</td>";
                                         echo "<td>".$data->getAttackPattern()."</td>";
+                                        $image = basename($data->getImage());
+                                        echo "<td>";
+                                        if($image !== ''){
+                                            echo "<img src=\"".htmlspecialchars($image, ENT_QUOTES, 'UTF-8')."\" width=\"50\">";
+                                        }
+                                        echo "</td>";
                                         echo "</tr>";
                                     }
                                 }
