@@ -16,7 +16,15 @@
         $_SESSION['listBosses'] = [];
         // initial dummy data
         $_SESSION['listBosses'][] = new Bosses("boss01", "Malenia", 10, 20, 2.5, 1200, 30, 45, "Blade of Miquella", 2, 3);
+        $_SESSION['listBosses'][] = new Bosses("boss02", "Radahn", -15, 8, 3.2, 1800, 50, 60, "Starscourge", 2, 5);
+        $_SESSION['listBosses'][] = new Bosses("boss03", "Ranni", 0, -12, 1.8, 900, 20, 25, "Lunar Princess", 1, 4);
+        $_SESSION['listBosses'][] = new Bosses("boss04", "Godfrey", 25, 30, 2.7, 1500, 40, 55, "First Elden Lord", 2, 6);
+        $_SESSION['listBosses'][] = new Bosses("boss05", "Morgott", -8, 14, 2.1, 1100, 35, 40, "Omen King", 2, 2);
         $_SESSION['isEdited']["boss01"] = 0;
+        $_SESSION['isEdited']["boss02"] = 0;
+        $_SESSION['isEdited']["boss03"] = 0;
+        $_SESSION['isEdited']["boss04"] = 0;
+        $_SESSION['isEdited']["boss05"] = 0;
     }
 
     // set session list boolean isEdited untuk penanda data yang sedang diedit
