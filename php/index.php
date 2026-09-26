@@ -13,19 +13,6 @@
         $_SESSION['listBosses'][] = new Bosses("boss04", "Godfrey", 25, 30, 2.7, 1500, 40, 55, "First Elden Lord", 2, 6, "godfrey.jpg");
         $_SESSION['listBosses'][] = new Bosses("boss05", "Morgott", -8, 14, 2.1, 1100, 35, 40, "Omen King", 2, 2, "morgott.jpg");
     }
-
-    $defaultImages = [
-        'boss01' => 'malenia.jpg',
-        'boss02' => 'radahn.jpg',
-        'boss03' => 'ranni.jpg',
-        'boss04' => 'godfrey.jpg',
-        'boss05' => 'morgott.jpg'
-    ];
-    foreach($_SESSION['listBosses'] as $boss){
-        if($boss !== null && $boss->getImage() === '' && isset($defaultImages[$boss->getId()])){
-            $boss->setImage($defaultImages[$boss->getId()]);
-        }
-    }
 ?>
 
 <!DOCTYPE html>
